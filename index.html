@@ -864,8 +864,6 @@
             }else{
                 document.getElementById("conteonole").textContent = parseFloat(mover2);
             }
-            
-            console.log(mover2);
 
             var elementosDiv = chatUL.querySelectorAll('div');
             if (elementosDiv.length > 0) {
@@ -999,9 +997,8 @@
             if (claveonoarchivo !== "solocon") {
                 if (archieli != "") {
                     var storageRef = firebase.storage().ref(archieli);
-                    storageRef.delete().then(function() {})
-                }else{
-                    ponernotificacion("Ingresa la contraseña antes de eliminar");
+                    storageRef.delete()
+                    .then(function() {})
                 }
             }
             if (keyparacon != "undefined") {
@@ -1011,12 +1008,13 @@
                     if (snapshot.exists()) {
                         ref.remove();
                         firebase.database().ref().child(chatonooo + '/' + cha).remove();
+                    }else{
+                        ponernotificacion("Ingresa la contraseña antes de eliminar");
                     }
                 })
                 .catch((error) => {
                     ponernotificacion("Contraseña incorrecta");
                 });
-
             } else {
                 if (contra == undefined || contra.length == 0 || contra == "undefined") {
                     firebase.database().ref().child(chatonooo + '/' + cha).remove();
