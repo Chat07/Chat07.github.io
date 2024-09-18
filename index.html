@@ -988,6 +988,8 @@
                 if (archieli != "") {
                     var storageRef = firebase.storage().ref(archieli);
                     storageRef.delete().then(function() {})
+                }else{
+                    ponernotificacion("Ingresa la contraseña antes de eliminar");
                 }
             }
             if (keyparacon != "undefined") {
