@@ -1,0 +1,1326 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    html {
+        color-scheme: dark !important;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    *:focus {
+        outline: none;
+    }
+
+    *,
+    *:after,
+    *:before {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: rgb(19 23 25);
+        color: white;
+        background-image: none;
+        text-align: left;
+        position: relative;
+        cursor: default;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    .home-section .text {
+        display: inline-block;
+        color: #11101d;
+        font-size: 25px;
+        font-weight: 500;
+        margin: 18px
+    }
+
+    #chatUL {
+        border: 0.5px solid #333333;
+        width: 100%;
+        height: calc(100% - 170px);
+        overflow: auto;
+        min-height: 100px;
+        min-width: 157px;
+    }
+
+    @media (max-width: 540px) {
+        #chatUL {
+            height: calc(100% - 185px) !important;
+        }
+
+        #respondever {
+            margin-left: 0px !important;
+            margin-top: 9px !important;
+        }
+    }
+
+    #chatUL::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+        background-color: #202020;
+        border-radius: 10px;
+    }
+
+    #chatUL::-webkit-scrollbar {
+        width: 10px;
+        background-color: #202020;
+    }
+
+    #mensaje {
+        max-height: 100px;
+        min-height: 41px;
+        width: calc(100% - 60px);
+        overflow: auto;
+        resize: none;
+    }
+
+    #chatUL::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: rgb(63, 68, 71);
+    }
+
+    #btnEnviar {
+        cursor: pointer;
+        margin-top: -3px;
+        width: 48px;
+        height: 48px;
+        margin-left: 8px;
+        position: absolute;
+        border: none;
+        background: #af861a;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #div14 {
+        max-width: 850px;
+        margin: auto;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .contextMenu {
+        display: none;
+        position: absolute;
+        background-color: #181818;
+        border: 1px solid #333;
+        z-index: 1000;
+        padding: 4px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.30s ease-out;
+    }
+
+    .contextMenu li {
+        list-style: none;
+        padding: 6px 16px;
+        cursor: pointer;
+        font-family: monospace;
+    }
+
+    .contextMenu li:hover {
+        background-color: hsl(0, 0%, 16%);
+    }
+
+    #button4bajo {
+        color: #FEFEFE;
+        text-decoration: none;
+        float: right;
+        z-index: 2;
+        display: none;
+        bottom: 49px;
+        position: relative;
+        right: 13px;
+        animation: fadeIn 0.35s ease-out;
+    }
+
+    #chatUL .uno {
+        color: #e1ae23;
+        cursor: default;
+        font-size: 17.4px;
+        font-family: sans-serif;
+        margin-left: 5px;
+        line-height: 30px;
+        max-height: 30px;
+        max-width: 95%;
+        resize: none;
+        overflow-y: hidden;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        width: 75%;
+    }
+
+    .dos::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background-color: #282b2d;
+    }
+
+    .dos::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #575758;
+    }
+
+    #chatUL .dos {
+        word-break: break-word;
+        white-space: pre-wrap;
+        margin-right: 10px;
+        overflow: auto;
+        font-family: monospace;
+        font-size: 16px;
+        margin-bottom: 10px;
+        max-height: 250px;
+    }
+
+    #chatUL .tres {
+        font-size: 11px;
+        margin-left: -111px;
+        float: right;
+        position: relative;
+        top: -17px;
+        right: 7px;
+        line-height: 10px;
+        color: #bcbcbc;
+    }
+
+    #overlay {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 9999;
+    }
+
+    #dropArea {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background-color: #323232;
+        color: white;
+        font-family: sans-serif;
+        font-size: 19px;
+        width: 99%;
+        height: 80%;
+        border: 2px dashed #d4d4d4;
+        z-index: 10000;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    div.widget.PopularPosts {
+        display: none;
+    }
+
+    a {
+        color: #2196f3;
+    }
+
+    ::selection {
+        background-color: #6c7883;
+        color: #000000;
+    }
+
+    .highlight {
+        background-color: gray;
+        animation: highlightAnimation 3s ease;
+    }
+
+    @keyframes highlightAnimation {
+        0% {
+            background-color: gray;
+        }
+
+        100% {
+            background-color: #282b2d;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade3In {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media screen and (min-width:0px) and (max-width:900px) {
+        #div14 {
+            margin: 10px;
+        }
+
+        button.svg-icon-24-button.back-button.rtl-reversible-icon.flat-icon-button.ripple {
+            margin-left: -11px !important;
+            margin-top: -11px !important;
+        }
+    }
+</style>
+<ul id="contextMenu1" class="contextMenu">
+    <li onclick="copiiii(null, null)">Copiar</li>
+</ul>
+
+<ul id="contextMenu2" class="contextMenu">
+    <li onclick="contextMenu2eli()">Eliminar</li>
+    <li onclick="contextMenu2res()">Responder</li>
+</ul>
+
+<ul id="contextMenu3" class="contextMenu">
+    <li onclick="copiarlinkarchi()">Copiar enlace de descarga</li>
+</ul>
+
+<div id="ante"></div>
+<section class="home-section" style="width: 100%;height: 100%;position: fixed;">
+    <div id="overlay"></div>
+    <div id="dropArea">
+        Arrastra y suelta un archivo aquí
+    </div>
+    <div id="div14">
+        <br />
+        <div id="chatUL">
+            Cargando...
+        </div>
+        <div id="notificattionn" style="display:none;position: fixed; z-index: 5; background-color: rgb(70 70 70); padding: 4px; text-align: center; font-family: sans-serif; padding-inline: 14px; padding-block: 6px; border-radius: 7px; bottom: 20px; left: 15px; animation: 0.15s ease-out 0s 1 normal none running fade3In;"></div>
+        <a id="button4bajo" onclick="bajar()">
+            <div style="align-items: center; background: #646464; border-radius: 50%; cursor: pointer; display: flex; height: 42px; justify-content: center; margin-bottom: 3px; margin-top: 3px; opacity: 0.9; width: 42px;"><svg height="20" viewbox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.8 6.7l5.7 5.7 5.7-5.7 1.6 1.6-7.3 7.2-7.3-7.2 1.6-1.6z" fill="#000000"></path>
+                </svg></div>
+        </a>
+        <form><label style="color: #aad937;">Nombre:</label>
+            <input id="conin" autocomplete="off" onchange="guardarYAutocompletar()" style="border: none; font-family: monospace; font-size: 15px; margin-top: 15px; outline: none; width: 175px;background-color: transparent;" type="text" placeholder="Escribe un nombre" />
+            <label id="respondever" style="display: none;margin-left: 15px;color: #AAD937;background: #2a2a2a;border-radius: 9px;padding: 2px;">Respondiendo a <span id="respondienn" value="">anónimo</span>
+                <svg onclick="borrarresponder()" width="24" height="24" fill="currentcolor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="cursor:pointer;display: inline-block;margin-bottom: -7px;margin-left: 3px;color: #ca6b6b;">
+                    <path d="M12 2.25c-5.376 0-9.75 4.374-9.75 9.75s4.374 9.75 9.75 9.75 9.75-4.374 9.75-9.75S17.376 2.25 12 2.25Zm3.53 12.22a.75.75 0 1 1-1.06 1.06L12 13.06l-2.47 2.47a.75.75 0 0 1-1.06-1.06L10.94 12 8.47 9.53a.75.75 0 0 1 1.06-1.06L12 10.94l2.47-2.47a.75.75 0 0 1 1.06 1.06L13.06 12l2.47 2.47Z"></path>
+                </svg></label>
+            <textarea id="mensaje" name="mensaje" onkeypress="validar(event)" style="border-color: #404040; font-family: monospace; font-size: 15px; height: 39px; margin-top: 10px; outline: none;background-color:#333333;"></textarea>
+            <button id="btnEnviar" onclick="clicado()" style="margin-top: 8px;" type="button"><svg fill="#000000" height="25px" style="cursor: pointer; margin-left: 5px;" viewbox="0 0 535.5 535.5" width="25px" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="0,497.25 535.5,267.75 0,38.25 0,216.75 382.5,267.75 0,318.75">
+                    </polygon>
+                </svg></button><br /><input id="archivoo" style="max-width: 271px;width: calc(100% - 36px);cursor: pointer;color: white;" type="file" />
+            <a id="porcen" style="display:none;color: white;margin-right: 3;font-family: sans-serif;font-size: 16px;">1234</a><progress id="progreso" max="100" style="display: none;margin-right: 2px;" value="0">0</progress>
+            <svg onclick="ponerimagg()" title="Añadir una imagen en mensaje" width="16" height="16" style="cursor: pointer;border-radius: 9px;margin-left: 2px;padding-top: 2px;    margin-bottom: -3px;color: #aad937;" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                <path d="M8.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3z"></path>
+                <path d="m21 15-5-5L5 21"></path>
+            </svg>
+            <svg onclick="ponerimagg()" title="Añadir una imagen en mensaje" width="20" height="20" style="cursor: pointer;background: transparent;margin-left: -11px;padding-bottom: 9px;padding-top: 2px;margin-bottom: -2px;color: #aad937;" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+            </svg>
+        </form>
+    </div>
+</section>
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-storage.js"></script>
+<script>
+    // Obtener el elemento del menú contextual y el contenedor específico
+    var contextMenu1 = document.getElementById('contextMenu1');
+    var contextMenu2 = document.getElementById('contextMenu2');
+    var contextMenu3 = document.getElementById('contextMenu3');
+    var chatUL = document.getElementById('chatUL');
+    var clickedElement = null;
+    var clickedmenuac = null;
+    var clickedmenuac3 = null;
+    var selection = null;
+    var timeoutrespuesta = null;
+
+    document.addEventListener('click', function() {
+        cerrarcontextmenu();
+    });
+
+    function cerrarcontextmenu() {
+        contextMenu1.style.display = 'none';
+        if (!event.target.closest('svg')) {
+            contextMenu2.style.display = 'none';
+        }
+        contextMenu3.style.display = 'none';
+    }
+
+    function menuuuu(thiss) {
+        cerrarcontextmenu();
+        if (contextMenu2.style.display == 'block' && clickedmenuac == thiss) {
+            contextMenu2.style.display = 'none';
+            clickedmenuac = null;
+        } else {
+            var newMenu = contextMenu2.cloneNode(true);
+            contextMenu2.parentNode.replaceChild(newMenu, contextMenu2);
+            contextMenu2 = newMenu;
+            contextMenu2.style.display = 'block';
+            var rect = thiss.getBoundingClientRect();
+            var menuWidth = contextMenu2.offsetWidth;
+            contextMenu2.style.left = `${rect.left - menuWidth + 6}px`;
+            contextMenu2.style.top = `${rect.bottom}px`;
+            clickedmenuac = thiss;
+        }
+    }
+
+    function menuu2(thiss) {
+        cerrarcontextmenu();
+        if (contextMenu1.style.display == 'block') {
+            contextMenu1.style.display = 'none';
+        } else {
+            clickedElement = event.target;
+            var newMenu = contextMenu1.cloneNode(true);
+            contextMenu1.parentNode.replaceChild(newMenu, contextMenu1);
+            contextMenu1 = newMenu;
+            contextMenu1.style.display = 'block';
+            contextMenu1.style.left = `${event.pageX + 1}px`;
+            contextMenu1.style.top = `${event.pageY + 1}px`;
+            selection = null;
+            selection = window.getSelection().toString();
+        }
+    }
+
+    function menuu3(thiss) {
+        cerrarcontextmenu();
+        if (contextMenu3.style.display == 'block' && clickedmenuac3 == thiss) {
+            contextMenu3.style.display = 'none';
+            clickedmenuac3 = null;
+        } else {
+            var newMenu = contextMenu3.cloneNode(true);
+            contextMenu3.parentNode.replaceChild(newMenu, contextMenu3);
+            contextMenu3 = newMenu;
+            contextMenu3.style.display = 'block';
+            var rect = thiss.getBoundingClientRect();
+            var menuWidth = contextMenu3.offsetWidth;
+            contextMenu3.style.left = `${rect.left}px`;
+            contextMenu3.style.top = `${rect.bottom}px`;
+            clickedmenuac3 = thiss;
+        }
+    }
+
+    function contextMenu2eli() {
+        if (clickedmenuac) {
+            var id = clickedmenuac.id;
+            var archielim = clickedmenuac.getAttribute("archielim");
+            var keyparacon = clickedmenuac.getAttribute("keyparacon");
+            var contra = clickedmenuac.getAttribute("contra");
+            var claveonoarchivo = clickedmenuac.getAttribute("claveonoarchivo");
+            hecv(id, archielim, keyparacon, contra, claveonoarchivo);
+        }
+    }
+
+    function contextMenu2res() {
+        if (clickedmenuac) {
+            var id = clickedmenuac.id;
+            var divElement = document.getElementById(id + "div");
+            var spanElement = divElement.querySelector(".uno");
+            var usuarioot = spanElement.textContent;
+            document.getElementById("respondienn").setAttribute("value", id);
+            document.getElementById("respondienn").textContent = usuarioot;
+            document.getElementById("respondever").style.display = "inline-block";
+        }
+    }
+
+    navegar = navigator.userAgent;
+    moes = ["Mobile", "iPhone", "iPod", "BlackBerry", "Opera Mini", "Sony", "MOT", "Nokia", "samsung"];
+    detctor = 0;
+    for (i in moes) {
+        comprueo = navegar.indexOf(moes[i]);
+        if (comprueo > -1) {
+            detctor = 1;
+        }
+    }
+    var subiendoo = false;
+    var inicio = "si";
+    var chatonooo = 'chat';
+    var firebaseConfig = {
+        apiKey: "AIzaSyCD7U9Nv6_l4jx-Ib4JW8Wn4STwvPK-wG4",
+        authDomain: "aplicaciones-gratis-chat.firebaseapp.com",
+        projectId: "aplicaciones-gratis-chat",
+        storageBucket: "aplicaciones-gratis-chat.appspot.com",
+        messagingSenderId: "1064882614707",
+        appId: "1:1064882614707:web:20f8e52f713c9300895bc6",
+        measurementId: "G-PPL3K4ESWS"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    var txtMensaje = document.getElementById('mensaje');
+
+    var url5698 = new URL(window.location.href);
+    var params5698 = new URLSearchParams(url5698.search);
+    var valorQ5698 = params5698.get('s');
+    if (valorQ5698 !== null) {
+        chatonooo = valorQ5698;
+    }
+
+    function irrespuesta(elementooo) {
+        var targetElement = document.getElementById(elementooo + "div");
+        if (targetElement) {
+            targetElement.classList.remove('highlight');
+            void targetElement.offsetWidth;
+            if (timeoutrespuesta) {
+                clearTimeout(timeoutrespuesta);
+            }
+            targetElement.classList.add('highlight');
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+
+            // Quitar la clase de resaltado después de 1 segundo
+            timeoutrespuesta = setTimeout(function() {
+                targetElement.classList.remove('highlight');
+            }, 3000);
+        }
+    }
+
+    function borrarresponder() {
+        document.getElementById("respondienn").setAttribute("value", "");
+        document.getElementById("respondienn").innerText = "";
+        document.getElementById("respondever").style.display = "none";
+    }
+
+    function cambiarvisib(idcamb, thiss) {
+        let inputElement = document.getElementById(idcamb);
+        if (inputElement.type === "text") {
+            inputElement.type = "password";
+            thiss.innerHTML = '<path d="M11.984 5.25c-3.653 0-7.401 2.115-10.351 6.344a.75.75 0 0 0-.013.833c2.267 3.548 5.964 6.323 10.364 6.323 4.352 0 8.125-2.783 10.397-6.34a.757.757 0 0 0 0-.819C20.104 8.076 16.303 5.25 11.984 5.25Z"></path> <path d="M12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"></path>';
+        } else {
+            inputElement.type = "text";
+            thiss.innerHTML = '<path d="M4.031 3 3 4.031l16.969 16.97L21 19.968 4.031 3Z"></path> <path d="m12.156 9.008 2.84 2.839a3.004 3.004 0 0 0-2.84-2.84Z"></path> <path d="m11.843 14.995-2.84-2.839a3.003 3.003 0 0 0 2.84 2.84Z"></path> <path d="M12 16.496a4.5 4.5 0 0 1-4.34-5.688L4.421 7.57C3.099 8.782 1.839 10.362.75 11.996c1.238 2.063 2.933 4.183 4.697 5.4 2.024 1.393 4.225 2.1 6.542 2.1a10.935 10.935 0 0 0 3.714-.647l-2.513-2.512c-.388.106-.788.16-1.19.16Z"></path> <path d="M12 7.5a4.5 4.5 0 0 1 4.34 5.688l3.312 3.312c1.367-1.23 2.629-2.886 3.598-4.5-1.237-2.036-2.949-4.151-4.743-5.382-2.05-1.405-4.243-2.118-6.519-2.118a10.45 10.45 0 0 0-3.666.67l2.49 2.49c.387-.107.786-.16 1.188-.16Z"></path>';
+        }
+    }
+
+    function clicado() {
+        if (document.getElementById('archivoo').value === "" || subiendoo === true) {
+            var mensaje = txtMensaje.value;
+            if (Object.entries(mensaje.trim()).length > 0) {
+                var nombre = document.getElementById("conin").value.trim();
+                if (nombre.length === 0) {
+                    nombre = "anónimo"
+                };
+                var respondiendo = document.getElementById("respondienn").getAttribute("value");
+                if (!respondiendo) {
+                    respondiendo = "";
+                }
+                var dia = new Date();
+                var mes = (dia.getMonth() + 1)
+                var fecha = (" " + dia.getHours() + ":" + dia.getMinutes() + "  " + dia.getDate() + "/" + mes + "/" + dia.getFullYear());
+                var posicionContra = nombre.indexOf("contra=");
+                var posicionContrab2 = nombre.indexOf("contrab=");
+                if (posicionContrab2 !== -1) {
+                    var antesContrab2 = nombre.substring(0, posicionContrab2);
+                    var despuesContrab2 = nombre.substring(posicionContrab2 + "contrab=".length);
+                    if (antesContrab2 === "" || antesContrab2.trim() === "") {
+                        nombre = "anonimo";
+                    } else {
+                        nombre = antesContrab2;
+                    }
+                    var newChildRefb2 = firebase.database().ref('seguro').child(despuesContrab2).push({
+                        contraelim: despuesContrab2
+                    });
+                    var newChildKeyb2 = newChildRefb2.key;
+                    firebase.database().ref().child(chatonooo).push({
+                        name: nombre,
+                        message: mensaje,
+                        fecha: fecha,
+                        urll: "none",
+                        ocultoono: "none",
+                        contraelim: newChildKeyb2,
+                        respondiendo: respondiendo
+                    });
+                } else {
+                    if (posicionContra !== -1) {
+                        var antesContra = nombre.substring(0, posicionContra);
+                        var despuesContra = nombre.substring(posicionContra + "contra=".length);
+                        if (antesContra === "" || antesContra.trim() === "") {
+                            nombre = "anonimo";
+                        } else {
+                            nombre = antesContra;
+                        }
+                        var newChildRef = firebase.database().ref('seguro').child(despuesContra).push({
+                            message: mensaje
+                        });
+                        var newChildKey = newChildRef.key;
+                        firebase.database().ref().child(chatonooo).push({
+                            name: nombre,
+                            fecha: fecha,
+                            urll: "none",
+                            ocultoono: "none",
+                            keyparacon: newChildKey,
+                            respondiendo: respondiendo
+                        });
+                    } else {
+                        firebase.database().ref().child(chatonooo).push({
+                            name: nombre,
+                            message: mensaje,
+                            fecha: fecha,
+                            ocultoono: "none",
+                            urll: "none",
+                            respondiendo: respondiendo
+                        });
+                    }
+                }
+                txtMensaje.value = "";
+                var objDiv = document.getElementById("chatUL");
+                objDiv.scrollTop = objDiv.scrollHeight;
+                if (detctor == 1) {} else {
+                    document.getElementById("mensaje").focus();
+                }
+                borrarresponder()
+            }
+        } else {
+            subiendoo = true;
+            const file = document.getElementById('archivoo').files[0];
+            if (file) {
+                var respondiendo = document.getElementById("respondienn").getAttribute("value");
+                if (!respondiendo) {
+                    respondiendo = "";
+                }
+                var nombre = document.getElementById("conin").value.trim();
+                var fileName = file.name;
+                var uniqueId
+                var contraelim
+                var pusoclaveono = "no"
+                var posicionContra = nombre.indexOf("contra=");
+                var posicionContrab2 = nombre.indexOf("contrab=");
+                if (posicionContrab2 !== -1) {
+                    var antesContrab2 = nombre.substring(0, posicionContrab2);
+                    var despuesContrab2 = nombre.substring(posicionContrab2 + "contrab=".length);
+                    if (despuesContrab2 === "" || despuesContrab2.trim() === "") {
+                        uniqueId = firebase.database().ref().push().key;
+                    } else {
+                        if (antesContrab2 === "" || antesContrab2.trim() === "") {
+                            nombre = "anonimo";
+                        } else {
+                            nombre = antesContrab2;
+                        }
+                        uniqueId = firebase.database().ref().push().key;
+                        pusoclaveono = "pusocontrab"
+                        var newChildRefb2 = firebase.database().ref('seguro').child(despuesContrab2).push({
+                            contraelim: despuesContrab2
+                        });
+                        contraelim = newChildRefb2.key;
+                    }
+                } else {
+                    if (posicionContra !== -1) {
+                        var antesContra = nombre.substring(0, posicionContra);
+                        var despuesContra = nombre.substring(posicionContra + "contra=".length);
+                        if (despuesContra === "" || despuesContra.trim() === "") {
+                            uniqueId = firebase.database().ref().push().key;
+                        } else {
+                            if (antesContra === "" || antesContra.trim() === "") {
+                                nombre = "anonimo";
+                            } else {
+                                nombre = antesContra;
+                            }
+                            var keyeyeyey = firebase.database().ref().push().key;
+                            uniqueId = despuesContra + "/" + keyeyeyey;
+                            pusoclaveono = "pusocontra"
+                            contraelim = keyeyeyey;
+                        }
+                    } else {
+                        uniqueId = firebase.database().ref().push().key;
+                    };
+                }
+                const storageRef = firebase.storage().ref(uniqueId + "/" + fileName + ".23");
+                const task = storageRef.put(file);
+                document.getElementById("progreso").style.display = "inline";
+                document.getElementById("porcen").style.display = "inline";
+                document.getElementById("archivoo").style.display = "none";
+                document.getElementById("btnEnviar").style.display = "none";
+                task.on("state_changed", function(snapshot) {
+                        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        document.getElementById("progreso").value = percentage;
+                        document.getElementById("porcen").innerHTML = percentage.toFixed(2) + "%";
+                    },
+                    (error) => {
+                        subiendoo = false;
+                        document.getElementById("archivoo").style.display = "initial";
+                        document.getElementById("progreso").style.display = "none";
+                        document.getElementById("porcen").style.display = "none";
+                        ponernotificacion("No se pudo enviar el archivo");
+                    },
+                    () => {
+                        subiendoo = false;
+                        document.getElementById("progreso").style.display = "none";
+                        document.getElementById("porcen").style.display = "none";
+                        document.getElementById("archivoo").style.display = "initial";
+                        document.getElementById("btnEnviar").style.display = "inline";
+                        if (nombre.length === 0) {
+                            nombre = "anónimo"
+                        };
+                        var dia = new Date();
+                        var mes = (dia.getMonth() + 1)
+                        var fecha = (" " + dia.getHours() + ":" + dia.getMinutes() + "  " + dia.getDate() + "/" + mes + "/" + dia.getFullYear());
+                        storageRef.getMetadata()
+                            .then((metadata) => {
+                                if (pusoclaveono == "pusocontra") {
+                                    firebase.database().ref().child(chatonooo).push({
+                                        name: nombre,
+                                        message: fileName,
+                                        fecha: fecha,
+                                        ocultoono: "inline",
+                                        urll: metadata.timeCreated,
+                                        keyparacon: contraelim,
+                                        respondiendo: respondiendo
+                                    });
+                                } else {
+                                    if (pusoclaveono == "pusocontrab") {
+                                        firebase.database().ref().child(chatonooo).push({
+                                            name: nombre,
+                                            message: fileName,
+                                            fecha: fecha,
+                                            ocultoono: "inline",
+                                            urll: metadata.timeCreated,
+                                            contraelim: contraelim,
+                                            carpetaaa: uniqueId,
+                                            respondiendo: respondiendo
+                                        });
+                                    } else {
+                                        firebase.database().ref().child(chatonooo).push({
+                                            name: nombre,
+                                            message: fileName,
+                                            fecha: fecha,
+                                            ocultoono: "inline",
+                                            urll: metadata.timeCreated,
+                                            carpetaaa: uniqueId,
+                                            respondiendo: respondiendo
+                                        });
+                                    }
+                                }
+                                document.getElementById('archivoo').value = ""
+                                subiendoo = false;
+                                document.getElementById("porcen").innerHTML = 0;
+                                document.getElementById("progreso").value = 0;
+                                var objDiv = document.getElementById("chatUL");
+                                objDiv.scrollTop = objDiv.scrollHeight;
+                                if (detctor == 1) {} else {
+                                    document.getElementById("mensaje").focus();
+                                }
+                            })
+                            .catch(function(error) {
+                                subiendoo = false;
+                                document.getElementById("archivoo").style.display = "initial";
+                                document.getElementById("progreso").style.display = "none";
+                                document.getElementById("porcen").style.display = "none";
+                                ponernotificacion("No se pudo enviar el archivo");
+                            })
+                    })
+                subiendoo = false;
+                borrarresponder();
+            }
+        }
+    };
+    firebase.database().ref().child(chatonooo)
+        .on('value', function(snapshot) {
+            var sionomover = "no";
+            var objDiv = document.getElementById("chatUL");
+            if (((chatttatul.scrollHeight - chatttatul.clientHeight + 1) - chatttatul.scrollTop) < 50) {
+                sionomover = "si";
+            }
+            var mover2 = 0;
+            var html = '';
+            var responderlista = [];
+            var imagenlista = [];
+            var chatUL = document.getElementById('chatUL');
+            var elementosDiv123 = chatUL.querySelectorAll('div');
+            if (elementosDiv123.length > 0) {
+                elementosDiv123.forEach(function(elementoss) {
+                    elementoss.dataset.mencionado = false;
+                });
+            }
+            snapshot.forEach(function(e) {
+                var keey = e.key.toString();
+                var elemento = document.getElementById(keey + "div");
+                if (elemento) {
+                    elemento.dataset.mencionado = true;
+                } else {
+
+                    var element = e.val();
+                    var nombre = element.name;
+                    var urll = element.urll;
+                    var mensaje = element.message;
+                    var keyparacon = element.keyparacon;
+                    var ocultoono = element.ocultoono;
+                    var link = "";
+                    var claveonoarchivo = "false";
+                    var carpetaaa = "";
+                    var contraelim = element.contraelim;
+                    var fecha = element.fecha;
+                    var respondiendoa = element.respondiendo;
+                    if (respondiendoa) {
+                        if (!responderlista.includes(respondiendoa)) {
+                            responderlista.push(respondiendoa);
+                        }
+                        respondiendoa = "<divr style='height: 41px;display: block;' class='" + respondiendoa + "respuesta' onclick='irrespuesta(\"" + respondiendoa + "\")'></divr>";
+                    } else {
+                        respondiendoa = "";
+                    }
+                    var archielim = "";
+                    if (keyparacon) {
+                        if (element.ocultoono == "none") {
+                            mensaje = '<div1 style="display: flex; align-items: center;"><input id="' + keyparacon + '" autocomplete="off" onkeypress="verifiseguro(this.id,event,this.getAttribute(\'nombr\'))" nombr="' + keey + '" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;border: none;font-family: monospace;font-size: 15px;margin-top: 8px;max-width: 190px;background-color: #000000;outline: none;padding-inline: 5px; width: 185px;height: 25px;color: #d3d3d3;" placeholder="Escribe la contraseña" type="password"><svg onclick="cambiarvisib(\'' + keyparacon + '\', this)" width="18" height="18" style="cursor: pointer; color: #bbbbbb; background: black; border-top-right-radius: 5px; border-bottom-right-radius: 5px; padding-inline: 5px; margin-top: 8px; width: 27px; height: 25px;" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11.984 5.25c-3.653 0-7.401 2.115-10.351 6.344a.75.75 0 0 0-.013.833c2.267 3.548 5.964 6.323 10.364 6.323 4.352 0 8.125-2.783 10.397-6.34a.757.757 0 0 0 0-.819C20.104 8.076 16.303 5.25 11.984 5.25Z"></path><path d="M12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"></path></svg><svg onclick="verifisegurofuncion(this.getAttribute(\'idedeeli\'), this.getAttribute(\'nombr\'))" nombr="' + keey + '" idedeeli="' + keyparacon + '" width="25" height="25" style="cursor: pointer;background: #f2653085;color: black;border-radius: 9px;margin-top: 8px;margin-left: 4px;" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></div1>'
+                        } else {
+                            mensaje = '<div1 style="display: flex; align-items: center;"><input id="' + keyparacon + '" autocomplete="off" onkeypress="verifiarchiseguro(this.id,event,this.getAttribute(\'nombr\'), this.getAttribute(\'mensaje\'), this.getAttribute(\'urll\'),)" urll="' + urll + '"  mensaje="' + mensaje + '" nombr="' + keey + '" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;border: none;font-family: monospace;font-size: 15px;margin-top: 8px;max-width: 190px;background-color: #000000;outline: none;padding-inline: 5px; width: 185px;height: 25px;color: #d3d3d3;" placeholder="Escribe la contraseña" type="password"><svg onclick="cambiarvisib(\'' + keyparacon + '\', this)" width="18" height="18" style="cursor: pointer; color: #bbbbbb; background: black; border-top-right-radius: 5px; border-bottom-right-radius: 5px; padding-inline: 5px; margin-top: 8px; width: 27px; height: 25px;" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11.984 5.25c-3.653 0-7.401 2.115-10.351 6.344a.75.75 0 0 0-.013.833c2.267 3.548 5.964 6.323 10.364 6.323 4.352 0 8.125-2.783 10.397-6.34a.757.757 0 0 0 0-.819C20.104 8.076 16.303 5.25 11.984 5.25Z"></path><path d="M12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"></path></svg><svg onclick="verifiarchisegurofuncion(this.getAttribute(\'idedeeli\'), this.getAttribute(\'nombr\'), this.getAttribute(\'mensaje\'), this.getAttribute(\'urll\'),)" urll="' + urll + '"  mensaje="' + mensaje + '" nombr="' + keey + '" idedeeli="' + keyparacon + '" width="25" height="25" style="cursor: pointer;background: #f2653085;color: black;border-radius: 9px;margin-top: 8px;margin-left: 4px;" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></div1>'
+                            claveonoarchivo = "true";
+                            archielim = carpetaaa + "/" + element.message + ".23";
+                            ocultoono = "none";
+                        }
+                    } else {
+                        if (contraelim == undefined || contraelim.length == 0 || contraelim == "undefined") {
+                            contraelim = "";
+                        } else {
+                            claveonoarchivo = "solocon";
+                        }
+                        if (element.ocultoono == "none") {
+                            mensaje = mensaje.replaceAll("<", "&lt;")
+                                .replaceAll(">", "&gt;")
+                                .replaceAll('(img="https://', '\n<image src="seguhtp')
+                                .replaceAll('img)', '></image>\n')
+                                .replace(/http([^"' <>\b\n]+)/g, "<a target='_blank' href='http$1'>http$1</a>")
+                                .replaceAll('<image src="seguhtp', '<image style="height: 100px !important;cursor:pointer;" onclick="agrandarImagen(this)" src="https://');
+                        } else {
+                            link = mensaje;
+                            carpetaaa = element.carpetaaa;
+                            archielim = carpetaaa + "/" + mensaje + ".23";
+                            var extension = mensaje.split('.').pop().toLowerCase();
+                            if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+                                mensaje += "\n<image id='" + carpetaaa + "' style='margin-top: 3px;height: 100px;cursor:pointer;' onclick='agrandarImagen(this)'></image>"
+                                imagenlista.push({
+                                    [carpetaaa]: archielim
+                                });
+                            }
+                        }
+                    }
+                    html += "<div id=" + keey + "div" + " style='margin-bottom: 6px;margin-top: 6px;margin-left: 5px;margin-right: 8px;border-color: #282b2d;background-color: #282b2d;border-radius: 10px;width: fit-content;'>" + respondiendoa + "<textarea class='uno' readonly='readonly'>" + nombre + "</textarea><svg onclick='event.preventDefault();menuuuu(this)' oncontextmenu='event.preventDefault();menuuuu(this)' id='" + keey + "' archielim='" + archielim + "' keyparacon='" + keyparacon + "' claveonoarchivo='" + claveonoarchivo + "' contra='" + contraelim + "' style='margin-top: 5px;margin-right: 2px;float:right;cursor:pointer;' fill=#ffffff width='20' height='20' viewBox='0 0 26 26'><path d='M12 14.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 6.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path></svg><br><pre oncontextmenu='event.preventDefault();menuu2(this)' ondblclick='copiiii(this, event)' id='" + keyparacon + "segundo' style='border-color: #282b2d;resize: none;color:#FFFFFF;outline: none;margin-left: 8px;' readonly='readonly' class='dos'>" + mensaje + "</pre><a style='z-index: 5;position: relative;cursor:pointer;background: #252525;padding: 2px;border-radius: 5px;margin-left:7px;color: #4b74b7;font-size:13px;display:" + ocultoono + ";' onclick='descargararchi(this.title, this.type, this)' data-lugardearchh='" + carpetaaa + "'  oncontextmenu='event.preventDefault();menuu3(this)' title='" + link + "' type='" + urll + "' target='_blank'>Descargar</a><br><a class='tres'>" + fecha + "</a></div>";
+                    mover2 += 1;
+
+                }
+            });
+
+            var elementosDiv = chatUL.querySelectorAll('div');
+            if (elementosDiv.length > 0) {
+                elementosDiv.forEach(function(elementoss) {
+                    if (elementoss.dataset.mencionado !== 'true') {
+                        elementoss.remove();
+                    }
+                });
+            }
+
+            if (responderlista) {
+                responderlista.forEach(function(item, index) {
+                    firebase.database().ref().child(`${chatonooo}/${item}`).once('value')
+                        .then((snapshot) => {
+                            if (snapshot.exists()) {
+                                var dataprev = snapshot.val();
+                                var messageee = dataprev.message;
+                                if (messageee) {
+                                    messageee = messageee.toString().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+                                }
+                                var ponerresp = '<ol style="color:#b4aeae;cursor:pointer;padding-left: 5px;margin-bottom: 3px;border-left: #AAD937 3px solid;background-color: #202020;border-radius: 5px;"><span style="color: #AAD937;font-size: 14px;">' + dataprev.name + '</span>';
+                                if (dataprev.keyparacon) {
+                                    ponerresp += '<pre style="color:#aa6868;font-size: 12px;font-family: monospace;height: 23px;contain: content;word-break: break-word; white-space: pre-wrap;">Archivo bloqueado</pre>';
+                                } else {
+                                    ponerresp += '<pre oncontextmenu="event.preventDefault();menuu2(this)" style="font-size: 12px;font-family: monospace;height: 23px;contain: content;word-break: break-word; white-space: pre-wrap;">' + messageee + '</pre>';
+                                }
+                                ponerresp += '</ol>';
+
+                                var elements = document.getElementsByClassName(item + 'respuesta');
+                                for (var i = 0; i < elements.length; i++) {
+                                    elements[i].innerHTML = ponerresp;
+                                }
+                            } else {
+                                var ponerresp = '<ol style="height: 38px;cursor:pointer;padding-left: 5px;margin-bottom: 3px;border-left: #AAD937 3px solid;background-color: #202020;border-radius: 5px;font-size: 15px;display: flex;color: #999696;align-items: center;">Mensaje eliminado</ol>';
+                                var elements = document.getElementsByClassName(item + 'respuesta');
+                                for (var i = 0; i < elements.length; i++) {
+                                    elements[i].innerHTML = ponerresp;
+                                }
+                            }
+                        })
+                });
+            }
+
+            if (imagenlista) {
+                imagenlista.forEach(function(item, index) {
+                    for (var key in item) {
+                        if (item.hasOwnProperty(key)) {
+                            var nombre = key;
+                            var contenido = item[key];
+                            firebase.storage().ref().child(item[key]).getDownloadURL()
+                                .then((url) => {
+                                    document.getElementById(key).src = url;
+                                })
+                        }
+                        break
+                    }
+                });
+            }
+
+
+            if (inicio === "si") {
+                chatUL.innerHTML = html;
+                setTimeout(() => {
+                    chatUL.style.scrollBehavior = "smooth";
+                }, 500);
+            } else {
+                chatUL.innerHTML += html;
+            }
+            if (mover2 > 0) {
+                if (inicio === "si") {
+                    inicio = "no";
+                    var objDiv = document.getElementById("chatUL");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                } else {
+                    if (sionomover === "si") {
+                        var objDiv = document.getElementById("chatUL");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                    }
+                }
+            }
+        });
+
+    function validar(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            if (e.shiftKey == 1) {} else {
+                var txtMensaje = document.getElementById('mensaje');
+                var mensaje = txtMensaje.value.trim();
+                if (Object.entries(mensaje).length === 0) {} else {
+                    if (detctor == 1) {} else {
+                        clicado();
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    function ponerimagg() {
+        var srcimag = prompt("Por favor, ingresa la url de la imagen:");
+        if ((srcimag !== null) && (srcimag.trim().length !== 0)) {
+            if (srcimag.includes("https://")) {
+                document.getElementById("mensaje").value += '(img="' + srcimag + '" img)';
+            } else {
+                ponernotificacion("Formato no aceptado");
+            }
+
+        }
+    }
+
+    function agrandarImagen(imagen) {
+        if (imagen.style.height === "100px") {
+            imagen.style.height = "300px";
+        } else {
+            imagen.style.height = "100px";
+        }
+    }
+
+    function hecv(cha, archieli, keyparacon, contra, claveonoarchivo) {
+        if (claveonoarchivo == "true") {
+            var storageRef = firebase.storage().ref(contra + "/" + keyparacon + "/" + archieli);
+            storageRef.delete()
+            .then(function() {
+                firebase.database().ref().child(chatonooo + '/' + cha).remove();
+            })
+            .catch((error) => {
+                ponernotificacion("Ingresa la contraseña antes de eliminar");
+            });
+        } else {
+            if (claveonoarchivo !== "solocon") {
+                if (archieli != "") {
+                    var storageRef = firebase.storage().ref(archieli);
+                    storageRef.delete().then(function() {})
+                }
+            }
+            if (keyparacon != "undefined") {
+                var ref = firebase.database().ref().child('seguro/' + contra + '/' + keyparacon.toString());
+                ref.once('value')
+                .then(function(snapshot) {
+                    if (snapshot.exists()) {
+                        ref.remove();
+                        firebase.database().ref().child(chatonooo + '/' + cha).remove();
+                    }
+                })
+                .catch((error) => {
+                    ponernotificacion("Contraseña incorrecta");
+                });
+
+            } else {
+                if (contra == undefined || contra.length == 0 || contra == "undefined") {
+                    firebase.database().ref().child(chatonooo + '/' + cha).remove();
+                } else {
+                    var contraseña = prompt("Por favor, ingresa la contraseña:");
+                    if ((contraseña !== null) && (contraseña.trim()).length !== 0) {
+                        var refb2 = firebase.database().ref().child('seguro/' + contraseña + '/' + contra.toString());
+                        refb2.once('value')
+                        .then(function(snapshot) {
+                            if (snapshot.exists()) {
+                                if (archieli != "") {
+                                    var storageRef = firebase.storage().ref(archieli);
+                                    storageRef.delete().then(function() {})
+                                }
+                                refb2.remove();
+                                firebase.database().ref().child(chatonooo + '/' + cha).remove();
+                            } else {
+                                ponernotificacion("Contraseña incorrecta");
+                            }
+                        })
+                        .catch((error) => {
+                            ponernotificacion("Contraseña incorrecta");
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+    function guardarYAutocompletar() {
+        var contenido = document.getElementById('conin').value;
+        localStorage.setItem('Nombreee', contenido);
+    }
+
+
+    function bajar() {
+        var objDiv = document.getElementById("chatUL");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+
+    function copiiii(elemento, event) {
+        document.getElementById("notificattionn").style.display = "none";
+        var texto = "";
+        if (event) {
+            if (event.ctrlKey) {
+                texto = elemento.textContent || elemento.innerText;
+            } else {
+                return
+            }
+        } else {
+            if (clickedElement) {
+                if (selection) {
+                    texto = selection;
+                } else {
+                    texto = clickedElement.textContent || clickedElement.innerText;
+                }
+            } else {
+                return
+            }
+        }
+        var tempTextArea = document.createElement("textarea");
+        tempTextArea.value = texto;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempTextArea);
+        ponernotificacion("Copiado");
+    }
+
+    function verifiseguro(uidss, e, cambiar) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            verifisegurofuncion(uidss, cambiar)
+        }
+    }
+
+    function verifisegurofuncion(uidss, cambiar) {
+        var contraseña = document.getElementById(uidss).value;
+        if ((contraseña !== null) && (contraseña.trim()).length !== 0) {
+            firebase.database().ref('seguro/' + contraseña + '/' + uidss.toString()).once('value')
+                .then((snapshot) => {
+                    var securedData = snapshot.val();
+                    if (securedData) {
+                        document.getElementById(cambiar).setAttribute('contra', contraseña);
+                        var mensaje = securedData.message;
+                        mensaje = mensaje.replaceAll("<", "&lt;")
+                            .replaceAll(">", "&gt;")
+                            .replaceAll('(img="https://', '\n<image src="seguhtp')
+                            .replaceAll('img)', '></image>\n')
+                            .replace(/http([^"' <>\b\n]+)/g, "<a target='_blank' href='http$1'>http$1</a>")
+                            .replaceAll('<image src="seguhtp', '<image style="height: 100px !important;cursor:pointer;" onclick="agrandarImagen(this)" src="https://');
+                        document.getElementById(uidss + "segundo").innerHTML = mensaje;
+                    } else {
+                        ponernotificacion("Contraseña incorrecta");
+                    }
+                });
+        }
+    }
+
+    function verifiarchiseguro(uidss, e, cambiar, mensajenom, urll) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            verifiarchisegurofuncion(uidss, cambiar, mensajenom, urll);
+        }
+    }
+
+    function ponernotificacion(contenidonot) {
+        document.getElementById("notificattionn").style.display = "none";
+        if (window.notification1Timeout) {
+            clearTimeout(window.notificationTimeout);
+        }
+        window.notification1Timeout = setTimeout(function() {
+            document.getElementById("notificattionn").innerHTML = contenidonot;
+            document.getElementById("notificattionn").style.display = "flow";
+        }, 5);
+        if (window.notificationTimeout) {
+            clearTimeout(window.notificationTimeout);
+        }
+        window.notificationTimeout = setTimeout(function() {
+            document.getElementById("notificattionn").style.display = "none";
+        }, 5000);
+    }
+
+    function verifiarchisegurofuncion(uidss, cambiar, mensajenom, urll) {
+        async function checkFileExistence(fileName1) {
+            try {
+                const storage123Ref = firebase.storage().ref(fileName1);
+                const url = await storage123Ref.getDownloadURL();
+                if (url) {
+                    document.getElementById(cambiar).setAttribute('contra', document.getElementById(uidss).value);
+                    document.getElementById(uidss + "segundo").style.height = "40px";
+                    document.getElementById(uidss + "segundo").style.marginBottom = "-5px";
+                    document.getElementById(uidss + "segundo").innerHTML = mensajenom + '<br><a style="z-index: 5;position: relative;cursor:pointer;background: #252525;padding: 2px;border-radius: 5px;width: 65px;color: #4b74b7;font-size:13px;margin-top: 2px;display:flex;" onclick="descargararchi(this.title, this.type, this)" data-lugardearchh="' + document.getElementById(uidss).value + '/' + uidss.toString() + '" oncontextmenu="event.preventDefault();menuu3(this)" title="' + mensajenom + '" type="' + urll + '" target="_blank" >Descargar</a>';
+
+                } else {
+                    ponernotificacion("Contraseña incorrecta");
+                    fileExists = false;
+                    return fileName1;
+                }
+            } catch (error) {
+                ponernotificacion("Contraseña incorrecta");
+                return fileName1;
+            }
+        }
+        var contraseña = document.getElementById(uidss).value;
+        if ((contraseña !== null) && (contraseña.trim()).length !== 0) {
+            checkFileExistence(contraseña + '/' + uidss.toString() + "/" + mensajenom + ".23");
+        }
+    }
+
+    function descargararchi(nombre, urll, descargaaa) {
+        var carpetaaa = descargaaa.dataset.lugardearchh; 
+        if (descargaaa.innerHTML == "Descargar") {
+            var storageRef = firebase.storage().ref(carpetaaa + "/" + nombre + ".23");
+            storageRef.getMetadata()
+                .then((metadata) => {
+                    storageRef.getDownloadURL()
+                        .then((url) => {
+                            if (urll) {
+                                if (metadata.timeCreated.toString() == urll.toString()) {
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.responseType = 'blob';
+                                    xhr.onprogress = (event) => {
+                                        if (event.lengthComputable) {
+                                            const percentComplete = (event.loaded / event.total) * 100;
+                                            descargaaa.innerHTML = (`${percentComplete.toFixed(2)}%` + "  <progress value=" + percentComplete.toFixed(2) + " max='100'></progress>")
+                                        }
+                                    };
+                                    xhr.onload = (event) => {
+                                        const blob = xhr.response;
+                                        const blobURL = URL.createObjectURL(blob);
+                                        const downloadLink = document.createElement('a');
+                                        downloadLink.href = blobURL;
+                                        downloadLink.download = nombre;
+                                        document.body.appendChild(downloadLink);
+                                        downloadLink.click();
+                                        document.body.removeChild(downloadLink);
+                                        URL.revokeObjectURL(blobURL);
+                                        descargaaa.innerHTML = "Descargar"
+                                    };
+                                    xhr.open('GET', url);
+                                    xhr.send();
+                                } else {
+                                    if (confirm("El archivo a sido modificado desde que se subio, ¿desea descargarlo de todos modos?")) {
+                                        const xhr = new XMLHttpRequest();
+                                        xhr.responseType = 'blob';
+                                        xhr.onprogress = (event) => {
+                                            if (event.lengthComputable) {
+                                                const percentComplete = (event.loaded / event.total) * 100;
+                                                descargaaa.innerHTML = (`${percentComplete.toFixed(2)}%` + "  <progress value=" + percentComplete.toFixed(2) + " max='100'></progress>")
+                                            }
+                                        };
+                                        xhr.onload = (event) => {
+                                            const blob = xhr.response;
+                                            const blobURL = URL.createObjectURL(blob);
+                                            const downloadLink = document.createElement('a');
+                                            downloadLink.href = blobURL;
+                                            downloadLink.download = nombre;
+                                            document.body.appendChild(downloadLink);
+                                            downloadLink.click();
+                                            document.body.removeChild(downloadLink);
+                                            URL.revokeObjectURL(blobURL);
+                                            descargaaa.innerHTML = "Descargar"
+                                        };
+                                        xhr.open('GET', url);
+                                        xhr.send();
+                                    }
+                                }
+                            } else {
+                                const xhr = new XMLHttpRequest();
+                                xhr.responseType = 'blob';
+                                xhr.onprogress = (event) => {
+                                    if (event.lengthComputable) {
+                                        const percentComplete = (event.loaded / event.total) * 100;
+                                        descargaaa.innerHTML = (`${percentComplete.toFixed(2)}%` + "  <progress value=" + percentComplete.toFixed(2) + " max='100'></progress>")
+                                    }
+                                };
+                                xhr.onload = (event) => {
+                                    const blob = xhr.response;
+                                    const blobURL = URL.createObjectURL(blob);
+                                    const downloadLink = document.createElement('a');
+                                    downloadLink.href = blobURL;
+                                    downloadLink.download = nombre;
+                                    document.body.appendChild(downloadLink);
+                                    downloadLink.click();
+                                    document.body.removeChild(downloadLink);
+                                    URL.revokeObjectURL(blobURL);
+                                    descargaaa.innerHTML = "Descargar"
+                                };
+                                xhr.open('GET', url);
+                                xhr.send();
+                            }
+                        })
+                        .catch((error) => {
+                            descargaaa.innerHTML = "Descargar"
+                        });
+                })
+                .catch(function(error) {
+                    ponernotificacion("Este archivo a sido eliminado");
+                })
+            descargaaa.innerHTML = "Descargar"
+        }
+    };
+
+    function copiarlinkarchi() {
+            let nombre = clickedmenuac3.title;
+            let carpetaaa = clickedmenuac3.dataset.lugardearchh; 
+            var storageRef = firebase.storage().ref(carpetaaa + "/" + nombre + ".23");
+            storageRef.getMetadata()
+                .then((metadata) => {
+                    storageRef.getDownloadURL()
+                        .then((url) => {
+                            var tempTextArea = document.createElement("textarea");
+                            tempTextArea.value = url;
+                            document.body.appendChild(tempTextArea);
+                            tempTextArea.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(tempTextArea);
+                            ponernotificacion("Copiado");
+                        })
+                        .catch((error) => {
+                            console.log("Error");
+                        });
+                })
+                .catch(function(error) {
+                    ponernotificacion("Este archivo a sido eliminado");
+                })
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropArea = document.getElementById('dropArea');
+        const areapantalla = document.getElementById('overlay');
+        const archivoo = document.getElementById('archivoo');
+        document.addEventListener('dragover', function(e) {
+            if (e.dataTransfer.types.includes("Files")) {
+                e.preventDefault();
+                dropArea.style.display = 'flex';
+                areapantalla.style.display = 'flex';
+            }
+        });
+        document.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            if (e.relatedTarget === null) {
+                dropArea.style.display = 'none';
+                areapantalla.style.display = 'none';
+            }
+        });
+        document.addEventListener('drop', function(e) {
+            e.preventDefault();
+            dropArea.style.display = 'none';
+            areapantalla.style.display = 'none';
+        });
+
+        dropArea.addEventListener('dragenter', preventDefaults, false);
+        dropArea.addEventListener('dragover', preventDefaults, false);
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        function handleDrop(e) {
+            let files = e.dataTransfer.files;
+
+            if (files.length) {
+                archivoo.files = files;
+            }
+        }
+    });
+
+    const dropArea = document.getElementById('dropArea');
+
+    dropArea.addEventListener('dragenter', preventDefaults, false);
+    dropArea.addEventListener('dragover', dragOver, false);
+    dropArea.addEventListener('dragleave', dragLeave, false);
+    dropArea.addEventListener('drop', dropHandler, false);
+
+    function preventDefaults(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    var chatttatul = document.getElementById('chatUL')
+    chatttatul.addEventListener('scroll', function() {
+        if (((chatttatul.scrollHeight - chatttatul.clientHeight + 1) - chatttatul.scrollTop) < 50) {
+            document.getElementById("button4bajo").style.display = "none"
+        } else {
+            document.getElementById("button4bajo").style.display = "flex"
+        }
+    });
+
+
+    function dragOver(e) {
+        dropArea.style.background = "#1d1d1d";
+    }
+
+    function dragLeave(e) {
+        dropArea.style.background = "#323232";
+    }
+
+    function dropHandler(e) {
+        dropArea.style.background = "#323232";
+    }
+
+    function autocompletar() {
+        var contenidoGuardado = localStorage.getItem('Nombreee');
+        if (contenidoGuardado) {
+            document.getElementById('conin').value = contenidoGuardado;
+        }
+    }
+    window.onload = autocompletar;
+</script>
