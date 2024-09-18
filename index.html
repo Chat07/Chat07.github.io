@@ -276,7 +276,7 @@
 
     @media screen and (min-width:0px) and (max-width:900px) {
         #div14 {
-            margin: 10px;
+            padding: 5px;
         }
 
         button.svg-icon-24-button.back-button.rtl-reversible-icon.flat-icon-button.ripple {
@@ -298,6 +298,13 @@
     <li onclick="copiarlinkarchi()">Copiar enlace de descarga</li>
 </ul>
 
+<ul id="contextMenu4" class="contextMenu">
+    <li onclick="etrarotrochatt()" id="boton1234569">Entrar a una sala</li>
+    <li onclick="copyurlll()" id="boton159">Copiar url de la sala</li>
+    <li onclick="Iniciobott()" id="boton1232332">Ir a inicio</li>
+    <li onclick="navigateBackOrRedirect()" id="boton12365165169">Atrás</li>
+</ul>
+
 <div id="ante"></div>
 <section class="home-section" style="width: 100%;height: 100%;position: fixed;">
     <div id="overlay"></div>
@@ -306,6 +313,11 @@
     </div>
     <div id="div14">
         <br />
+        <svg id="menuprin" onclick="event.preventDefault();menuu4(this)" oncontextmenu="event.preventDefault();menuu4(this)" style="position: absolute;right: 0px;float: right;cursor:pointer;color: #fdfdfd82;" width="28" height="28" viewBox="0 0 26 26" fill="currentcolor">  
+            <path d="M19.125 3H4.875A2.633 2.633 0 0 0 2.25 5.625v9a2.633 2.633 0 0 0 2.625 2.625H6.75V21l4.393-3.663a.375.375 0 0 1 .24-.087h7.742a2.633 2.633 0 0 0 2.625-2.625v-9A2.633 2.633 0 0 0 19.125 3Z"></path>
+            <path fill="currentColor" stroke="none" d="M7.5 11.625a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
+            <path fill="currentColor" stroke="none" d="M12 11.625a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
+            <path fill="currentColor" stroke="none" d="M16.5 11.625a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path></svg>
         <div id="chatUL">
             Cargando...
         </div>
@@ -349,6 +361,7 @@
     var contextMenu1 = document.getElementById('contextMenu1');
     var contextMenu2 = document.getElementById('contextMenu2');
     var contextMenu3 = document.getElementById('contextMenu3');
+    var contextMenu4 = document.getElementById('contextMenu4');
     var chatUL = document.getElementById('chatUL');
     var clickedElement = null;
     var clickedmenuac = null;
@@ -362,10 +375,13 @@
 
     function cerrarcontextmenu() {
         contextMenu1.style.display = 'none';
-        if (!event.target.closest('svg')) {
+        if (!event.target.closest('.menumensaje')) {
             contextMenu2.style.display = 'none';
         }
         contextMenu3.style.display = 'none';
+        if (!event.target.closest('#menuprin')) {
+            contextMenu4.style.display = 'none';
+        }
     }
 
     function menuuuu(thiss) {
@@ -418,6 +434,22 @@
             contextMenu3.style.left = `${rect.left}px`;
             contextMenu3.style.top = `${rect.bottom}px`;
             clickedmenuac3 = thiss;
+        }
+    }
+
+    function menuu4(thiss) {
+        cerrarcontextmenu();
+        if (contextMenu4.style.display == 'block') {
+            contextMenu4.style.display = 'none';
+        } else {
+            var newMenu = contextMenu4.cloneNode(true);
+            contextMenu4.parentNode.replaceChild(newMenu, contextMenu4);
+            contextMenu4 = newMenu;
+            contextMenu4.style.display = 'block';
+            var rect = thiss.getBoundingClientRect();
+            var menuWidth = contextMenu4.offsetWidth;
+            contextMenu4.style.left = `${rect.left - menuWidth + 6}px`;
+            contextMenu4.style.top = `${rect.bottom}px`;
         }
     }
 
@@ -816,7 +848,7 @@
                             }
                         }
                     }
-                    html += "<div id=" + keey + "div" + " style='margin-bottom: 6px;margin-top: 6px;margin-left: 5px;margin-right: 8px;border-color: #282b2d;background-color: #282b2d;border-radius: 10px;width: fit-content;'>" + respondiendoa + "<textarea class='uno' readonly='readonly'>" + nombre + "</textarea><svg onclick='event.preventDefault();menuuuu(this)' oncontextmenu='event.preventDefault();menuuuu(this)' id='" + keey + "' archielim='" + archielim + "' keyparacon='" + keyparacon + "' claveonoarchivo='" + claveonoarchivo + "' contra='" + contraelim + "' style='margin-top: 5px;margin-right: 2px;float:right;cursor:pointer;' fill=#ffffff width='20' height='20' viewBox='0 0 26 26'><path d='M12 14.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 6.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path></svg><br><pre oncontextmenu='event.preventDefault();menuu2(this)' ondblclick='copiiii(this, event)' id='" + keyparacon + "segundo' style='border-color: #282b2d;resize: none;color:#FFFFFF;outline: none;margin-left: 8px;' readonly='readonly' class='dos'>" + mensaje + "</pre><a style='z-index: 5;position: relative;cursor:pointer;background: #252525;padding: 2px;border-radius: 5px;margin-left:7px;color: #4b74b7;font-size:13px;display:" + ocultoono + ";' onclick='descargararchi(this.title, this.type, this)' data-lugardearchh='" + carpetaaa + "'  oncontextmenu='event.preventDefault();menuu3(this)' title='" + link + "' type='" + urll + "' target='_blank'>Descargar</a><br><a class='tres'>" + fecha + "</a></div>";
+                    html += "<div id=" + keey + "div" + " style='margin-bottom: 6px;margin-top: 6px;margin-left: 5px;margin-right: 8px;border-color: #282b2d;background-color: #282b2d;border-radius: 10px;width: fit-content;'>" + respondiendoa + "<textarea class='uno' readonly='readonly'>" + nombre + "</textarea><svg class='menumensaje' onclick='event.preventDefault();menuuuu(this)' oncontextmenu='event.preventDefault();menuuuu(this)' id='" + keey + "' archielim='" + archielim + "' keyparacon='" + keyparacon + "' claveonoarchivo='" + claveonoarchivo + "' contra='" + contraelim + "' style='margin-top: 5px;margin-right: 2px;float:right;cursor:pointer;' fill=#ffffff width='20' height='20' viewBox='0 0 26 26'><path d='M12 14.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 6.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path></svg><br><pre oncontextmenu='event.preventDefault();menuu2(this)' ondblclick='copiiii(this, event)' id='" + keyparacon + "segundo' style='border-color: #282b2d;resize: none;color:#FFFFFF;outline: none;margin-left: 8px;' readonly='readonly' class='dos'>" + mensaje + "</pre><a style='z-index: 5;position: relative;cursor:pointer;background: #252525;padding: 2px;border-radius: 5px;margin-left:7px;color: #4b74b7;font-size:13px;display:" + ocultoono + ";' onclick='descargararchi(this.title, this.type, this)' data-lugardearchh='" + carpetaaa + "'  oncontextmenu='event.preventDefault();menuu3(this)' title='" + link + "' type='" + urll + "' target='_blank'>Descargar</a><br><a class='tres'>" + fecha + "</a></div>";
                     mover2 += 1;
 
                 }
@@ -1296,13 +1328,13 @@
 
     var chatttatul = document.getElementById('chatUL')
     chatttatul.addEventListener('scroll', function() {
+        cerrarcontextmenu();
         if (((chatttatul.scrollHeight - chatttatul.clientHeight + 1) - chatttatul.scrollTop) < 50) {
             document.getElementById("button4bajo").style.display = "none"
         } else {
             document.getElementById("button4bajo").style.display = "flex"
         }
     });
-
 
     function dragOver(e) {
         dropArea.style.background = "#1d1d1d";
@@ -1323,4 +1355,70 @@
         }
     }
     window.onload = autocompletar;
+
+
+    var urll = new URL(window.location.href);
+    var params598 = new URLSearchParams(urll.search);
+    var valorQ598 = params598.get('s');
+    if (valorQ598 !== null) {
+        document.title = "Sala: " + valorQ598;
+    } else {
+        document.getElementById("boton159").style.display = 'none';
+        document.getElementById("boton12365165169").style.display = 'none';
+        document.getElementById("boton1232332").style.display = 'none';
+    }
+
+    function aparecerbotonn() {
+        if (document.getElementById('menudeeles').style.display == 'none') {
+            document.getElementById('menudeeles').style.display = 'block';
+            document.getElementById('salirmenu').style.display = 'block';
+        } else {
+            document.getElementById('menudeeles').style.display = 'none';
+            document.getElementById('salirmenu').style.display = 'none';
+        }
+    }
+
+    function etrarotrochatt() {
+        var texto = prompt("Ingresa el nombre de la sala:\n(chat para volver a la principal)");
+        if (texto !== null) {
+            if (texto !== "seguro" && texto.indexOf("/") === -1) {
+                var textoMinusculas = texto.toLowerCase();
+                if (textoMinusculas === "chat" || textoMinusculas === "inicio") {
+                    window.location.href = window.location.origin + window.location.pathname;
+                } else {
+                    texto = encodeURIComponent(texto);
+                    var nuevaURL = window.location.origin + window.location.pathname + '?s=' + texto;
+                    window.location.href = nuevaURL;
+                }
+            } else {
+                alert("Esta sala no esta disponible \n (no se permite '/' ni 'seguro')");
+            }
+        }
+    }
+
+    function copyurlll() {
+        var url562398 = new URL(window.location.href);
+        var elementoTemporal = document.createElement("textarea");
+        elementoTemporal.value = (url562398);
+        elementoTemporal.style.position = "fixed";
+        elementoTemporal.style.opacity = 0;
+        document.body.appendChild(elementoTemporal);
+        elementoTemporal.select();
+        elementoTemporal.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        document.body.removeChild(elementoTemporal);
+        ponernotificacion("Url de la sala copiada");
+    }
+
+    function navigateBackOrRedirect() {
+        if (window.history.length == 1) {
+            window.location.href = window.location.origin + window.location.pathname;
+        } else {
+            window.history.back();
+        }
+    }
+
+    function Iniciobott() {
+        window.location.href = window.location.origin + window.location.pathname;
+    }
 </script>
