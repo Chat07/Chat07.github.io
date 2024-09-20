@@ -739,7 +739,7 @@
                                         name: nombre,
                                         message: fileName,
                                         fecha: fecha,
-                                        ocultoono: "inline",
+                                        ocultoono: "",
                                         urll: metadata.timeCreated,
                                         keyparacon: contraelim,
                                         respondiendo: respondiendo
@@ -750,7 +750,7 @@
                                             name: nombre,
                                             message: fileName,
                                             fecha: fecha,
-                                            ocultoono: "inline",
+                                            ocultoono: "",
                                             urll: metadata.timeCreated,
                                             contraelim: contraelim,
                                             carpetaaa: uniqueId,
@@ -761,7 +761,7 @@
                                             name: nombre,
                                             message: fileName,
                                             fecha: fecha,
-                                            ocultoono: "inline",
+                                            ocultoono: "",
                                             urll: metadata.timeCreated,
                                             carpetaaa: uniqueId,
                                             respondiendo: respondiendo
@@ -861,6 +861,7 @@
                                 .replace(/http([^"' <>\b\n]+)/g, "<a target='_blank' href='http$1'>http$1</a>")
                                 .replaceAll('<image src="seguhtp', '<image style="height: 100px !important;cursor:pointer;" onclick="agrandarImagen(this)" src="https://');
                         } else {
+                            ocultoono = "inline-block";
                             link = mensaje;
                             carpetaaa = element.carpetaaa;
                             archielim = carpetaaa + "/" + mensaje + ".23";
@@ -873,7 +874,7 @@
                             }
                         }
                     }
-                    html += "<div id=" + keey + "div" + " style='margin-bottom: 6px;margin-top: 6px;margin-left: 5px;margin-right: 8px;border-color: #282b2d;background-color: #282b2d;border-radius: 10px;width: fit-content;'>" + respondiendoa + "<textarea class='uno' readonly='readonly'>" + nombre + "</textarea><svg class='menumensaje' onclick='event.preventDefault();menuuuu(this)' oncontextmenu='event.preventDefault();menuuuu(this)' id='" + keey + "' archielim='" + archielim + "' keyparacon='" + keyparacon + "' claveonoarchivo='" + claveonoarchivo + "' contra='" + contraelim + "' style='margin-top: 5px;margin-right: 2px;float:right;cursor:pointer;' fill=#ffffff width='20' height='20' viewBox='0 0 26 26'><path d='M12 14.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 6.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path></svg><br><pre oncontextmenu='event.preventDefault();menuu2(this)' ondblclick='copiiii(this, event)' id='" + keyparacon + "segundo' style='border-color: #282b2d;resize: none;color:#FFFFFF;outline: none;margin-left: 8px;' readonly='readonly' class='dos'>" + mensaje + "</pre><a style='z-index: 5;position: relative;cursor:pointer;background: #636363;padding: 2px;border-radius: 5px;margin-left:7px;color: #000000;font-weight: bold;font-size:13px;display:" + ocultoono + ";' onclick='descargararchi(this.title, this.type, this)' data-lugardearchh='" + carpetaaa + "'  oncontextmenu='event.preventDefault();menuu3(this)' title='" + link + "' type='" + urll + "' target='_blank'>Descargar</a><br><a class='tres'>" + fecha + "</a></div>";
+                    html += "<div id=" + keey + "div" + " style='margin-bottom: 6px;margin-top: 6px;margin-left: 5px;margin-right: 8px;border-color: #282b2d;background-color: #282b2d;border-radius: 10px;width: fit-content;'>" + respondiendoa + "<textarea class='uno' readonly='readonly'>" + nombre + "</textarea><svg class='menumensaje' onclick='event.preventDefault();menuuuu(this)' oncontextmenu='event.preventDefault();menuuuu(this)' id='" + keey + "' archielim='" + archielim + "' keyparacon='" + keyparacon + "' claveonoarchivo='" + claveonoarchivo + "' contra='" + contraelim + "' style='margin-top: 5px;margin-right: 2px;float:right;cursor:pointer;' fill=#ffffff width='20' height='20' viewBox='0 0 26 26'><path d='M12 14.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 21.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path><path d='M12 6.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z'></path></svg><br><pre oncontextmenu='event.preventDefault();menuu2(this)' ondblclick='copiiii(this, event)' id='" + keyparacon + "segundo' style='border-color: #282b2d;resize: none;color:#FFFFFF;outline: none;margin-left: 8px;' readonly='readonly' class='dos'>" + mensaje + "</pre><a style='z-index: 5;position: relative;cursor:pointer;background: #636363;padding: 2px;border-radius: 5px;margin-left:7px;color: #000000;font-weight: bold;font-size:13px;margin-bottom: 4px;display:" + ocultoono + ";' onclick='descargararchi(this.title, this.type, this)' data-lugardearchh='" + carpetaaa + "'  oncontextmenu='event.preventDefault();menuu3(this)' title='" + link + "' type='" + urll + "' target='_blank'>Descargar</a><br><a class='tres'>" + fecha + "</a></div>";
                     mover2 += 1;
 
                 }
