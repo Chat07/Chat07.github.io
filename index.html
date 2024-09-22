@@ -879,14 +879,14 @@
 
                 }
             });
-
             let conteonole = document.getElementById("conteonole").textContent;
-            if (conteonole) {
-                document.getElementById("conteonole").textContent = parseFloat(conteonole) +  parseFloat(mover2);
-            }else{
-                document.getElementById("conteonole").textContent = parseFloat(mover2);
+            if (mover2>0) {
+                if (conteonole) {
+                    document.getElementById("conteonole").textContent = parseFloat(conteonole) +  parseFloat(mover2);
+                }else{
+                    document.getElementById("conteonole").textContent = parseFloat(mover2);
+                }
             }
-
             var elementosDiv = chatUL.querySelectorAll('div');
             if (elementosDiv.length > 0) {
                 elementosDiv.forEach(function(elementoss) {
