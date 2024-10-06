@@ -1426,7 +1426,7 @@
 
     function etrarotrochatt() {
         var texto = prompt("Ingresa el nombre de la sala:\n(chat para volver a la principal)");
-        if (texto !== null) {
+        if (texto !== null && texto !== "") {
             if (texto !== "seguro" && texto.indexOf("/") === -1) {
                 var textoMinusculas = texto.toLowerCase();
                 if (textoMinusculas === "chat" || textoMinusculas === "inicio") {
